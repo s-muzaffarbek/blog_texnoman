@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Blog {% endblock %}
+
+{% block content %}
+    <h1>All blogs</h1>
+    {% for blog in blogs %}
+        <div class="card" style="width: 60%">
+            <div class="card-body">
+                <a href="{% url 'blog_detail' blog.slug %}" style="text-decoration: none;"><h5 style="color:#18bc9c;" class="card-title">{{ blog.title }}</h5></a>
+                <p class="card-text"><a href="{% url 'blog_category' blog.category.slug %}" style="text-decoration: none; color: black"><i class="fa-solid fa-star"></i>{{ blog.category }}</a>
+                &nbsp;<small class="text-muted">{{ blog.created|date:'d-m-y/H:i' }}</small></p>
+                <img style="height: 400px" src="{{ blog.image.url }}" class="card-img-bottom" alt="...">
+                <p class="card-text">{{ blog.content|truncatewords:50|safe }}</p>
+                <p class="card-text">
+                    <small class="text-muted"><i class="fa-solid fa-user"></i> {{ blog.user.username }}</small>
+                    {% for tag in blog.tags.all %}
+                        <a href="{% url 'tag_filter' tag.slug %}" class="text-muted">{{ tag.name }}</a>
+                    {% endfor %}
+                <small class="text-muted" style="padding-left: 500px" >
+                     <i class="fa-solid fa-eye"></i> {{ blog.views }}
+                     <i class="fa-solid fa-comment"></i> {{ blog.comment_blog.count }}
+                </small>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

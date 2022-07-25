@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}       {% endblock %}
+
+{% block content %}
+<h1>Blog delete</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Siz haqiqatdan ham <strong>{{ blog.title }}</strong> blogni o'chirmoqchimisiz?:</p>
+    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i> Delete</button>
+    <a class="btn btn-primary" href="{% url 'blog_detail' blog.slug %}"><i class="fa-solid fa-rotate-left"></i> Cancel</a>
+</form>
+{% endblock %}

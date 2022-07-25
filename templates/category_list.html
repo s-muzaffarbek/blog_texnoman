@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Category {% endblock %}
+
+{% block content %}
+    <h1>All Category</h1>
+{% for category in categories %}
+    <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ category.image.url }}" class="img-fluid rounded-start" alt="..." style="width: 150px">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+          <a href="{% url 'blog_category' category.slug %}">
+        <h5 class="card-title">{{ category.name }}</h5></a>
+        <p class="card-text">{{ category.content }}</p>
+        <p class="card-text"><small class="text-muted">{{ category.created|date:'d-m-Y' }} / {{ category.created|date:'h:i' }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %} Update Blog {% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="" class="form-label">Title</label>
+            {% render_field form.title type="text" class="form-control" id="" %}
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Images</label>
+            {% render_field form.image type="file" class="form-control" id="" %}
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Content</label>
+            {% render_field form.content type="text" class="form-control" id="" %}
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Category</label>
+            {% render_field form.category type="text" class="form-control" id="" %}
+        </div>
+{#        <div class="mb-3">#}
+{#            <label for="" class="form-label">Tags</label>#}
+{#            {% render_field form.tags type="text" class="form-control" id="" %}#}
+{#        </div>#}
+
+        <button class="btn btn-success" type="submit">Update Blog</button>
+    </form>
+{% endblock %}

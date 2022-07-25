@@ -1,0 +1,49 @@
+<section class="content-item" id="comments">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-8">
+                {% if user.username %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <h3 class="pull-left">New Comment</h3>
+                        <fieldset>
+                            <div class="row">
+                                <div class="mb-3">
+                                    {{ form.content }}
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Send</button>
+                        </fieldset>
+                    </form>
+                {% else %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <h3 class="pull-left">New Comment</h3>
+                        <fieldset>
+                            <div class="row">
+                                <div class="mb-3">
+                                    {{ form.content }}
+                                </div>
+                            </div>
+                            <a href="{% url 'login' %}" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Send</a>
+                        </fieldset>
+                    </form>
+                {% endif %}
+
+                <h3>{{ comments.count }} Comments</h3>
+                {% for comment in comments %}
+                    <div class="media">
+                        <div class="media-body">
+                            <h6 class="media-heading"><i class="fa-solid fa-user"></i> {{ comment.user.username }}</h6>
+                            <p>{{ comment.content }}</p>
+                            <ul class="list-unstyled list-inline media-detail pull-left">
+                                <li><i class="fa fa-calendar"></i> {{ comment.created|date:'d-m-Y/H:i' }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

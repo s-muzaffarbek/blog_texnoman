@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {% endblock %}
+
+{% block content %}
+    <h1>{{ tag.name }} oid bloglar</h1>
+    <hr>
+    {% for blog in blogs %}
+        <div class="card" style="width: 60%">
+            <div class="card-body">
+                <a href="{% url 'blog_detail' blog.slug %}"><h5 class="card-title">{{ blog.title }}</h5></a>
+                <p class="card-text"><a href="{% url 'blog_category' blog.category.slug %}"><i class="fa-solid fa-star"></i>{{ blog.category }}</a>
+                &nbsp;<small class="text-muted">{{ blog.created|date }} / {{ blog.created|time:"h:i" }}</small></p>
+                <img style="height: 400px" src="{{ blog.image.url }}" class="card-img-bottom" alt="...">
+                <p class="card-text">{{ blog.content|truncatewords:50|safe }}</p>
+                <p class="card-text">
+                    <small class="text-muted"><i class="fa-solid fa-user"></i> {{ blog.user.username }}</small>
+                    {% for tag in blog.tags.all %}
+                        <a href="{% url 'tag_filter' tag.slug %}" class="text-muted">{{ tag.name }}</a>
+                    {% endfor %}
+                    <small class="text-muted"><i class="fa-solid fa-eye"></i> {{ blog.views }}</small>
+                    <small class="text-muted"><i class="fa-solid fa-comment"></i> {{ blog.comment_blog.count }}</small>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

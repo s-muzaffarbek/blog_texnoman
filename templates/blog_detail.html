@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}  {% endblock %}
+
+{% block content %}
+    <h1>{{ blog.title }}</h1>
+    <img style="width: 600px" src="{{ blog.image.url }}">
+    <p>{{ blog.content }}</p>
+    <p>User: {{ blog.user.username }}</p>
+    <p>Sana: {{ blog.created|date:'d-m-Y' }} / {{ blog.created|time:'h:i' }} Ko'rish: {{ blog.views }}</p>
+    {% for tag in blog.tags.all %}
+        <a href="#">#{{ tag.name }}</a>
+    {% endfor %}
+    <br>
+    {% if blog.user == request.user %}
+        <a class="btn btn-success" href="{% url 'blog_update' blog.slug %}"><i class="fa-solid fa-spinner"></i> Update</a>
+        <a class="btn btn-danger" href="{% url 'blog_delete' blog.slug %}"><i class="fa-solid fa-trash-can"></i> Delete</a>
+    {% endif %}
+    <hr>
+    {% include 'comment.html' %}
+
+    <hr>
+
+{% endblock %}

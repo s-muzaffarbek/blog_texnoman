@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}       {% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="" class="form-label">Username</label>
+            {% render_field form.username type="text" class="form-control" id="" %}
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">First name</label>
+            {% render_field form.first_name type="text" class="form-control" id="" %}
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Last name</label>
+            {% render_field form.last_name type="text" class="form-control" id="" %}
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Picture</label>
+            {% render_field form.img type="file" class="form-control" id="" %}
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Phone number</label>
+            {% render_field form.phone type="phone" class="form-control" id="" %}
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Birthday</label>
+            {% render_field form.birth_day type="date" class="form-control" id="" %}
+        </div>
+        <button class="btn btn-success" type="submit">Update User</button>
+    </form>
+{% endblock %}
